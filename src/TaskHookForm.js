@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 
-const formSemasi = Yup.object().shape({
-  title: Yup.string()
-    .required("Task başlığı yazmalısınız")
-    .min(3, "Task başlığı en az 3 karakter olmalı"),
-  description: Yup.string()
-    .required("Task açıklaması yazmalısınız")
-    .min(10, "Task açıklaması en az 10 karakter olmalı"),
-  people: Yup.array()
-    .max(3, "En fazla 3 kişi seçebilirsiniz")
-    .min(1, "Lütfen en az bir kişi seçin"),
-});
+// const formSemasi = Yup.object().shape({
+//   title: Yup.string()
+//     .required("Task başlığı yazmalısınız")
+//     .min(3, "Task başlığı en az 3 karakter olmalı"),
+//   description: Yup.string()
+//     .required("Task açıklaması yazmalısınız")
+//     .min(10, "Task açıklaması en az 10 karakter olmalı"),
+//   people: Yup.array()
+//     .max(3, "En fazla 3 kişi seçebilirsiniz")
+//     .min(1, "Lütfen en az bir kişi seçin"),
+// });
 
 const TaskHookForm = ({ kisiler, submitFn }) => {
   const {
@@ -36,11 +36,11 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
   // });
 
   // yup error stateleri
-  const [formErrors, setFormErrors] = useState({
-    title: "",
-    description: "",
-    people: "",
-  });
+  // const [formErrors, setFormErrors] = useState({
+  //   title: "",
+  //   description: "",
+  //   people: "",
+  // });
 
   // const [buttonDisabled, setButtonDisabled] = useState(true);
 
@@ -50,22 +50,22 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
   // }, [formData]);
 
   // yup form alani her değiştiğinde çalışan kontrol fonksiyonu
-  function formAlaniniKontrolEt(name, value) {
-    Yup.reach(formSemasi, name)
-      .validate(value)
-      .then(() => {
-        setFormErrors({
-          ...formErrors,
-          [name]: "",
-        });
-      })
-      .catch((err) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: err.errors[0],
-        });
-      });
-  }
+  // function formAlaniniKontrolEt(name, value) {
+  //   Yup.reach(formSemasi, name)
+  //     .validate(value)
+  //     .then(() => {
+  //       setFormErrors({
+  //         ...formErrors,
+  //         [name]: "",
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       setFormErrors({
+  //         ...formErrors,
+  //         [name]: err.errors[0],
+  //       });
+  //     });
+  // }
 
   // checkboxların değişimini state içerisine eklemek için özel fonksiyon
   // function handleCheckboxChange(e) {
