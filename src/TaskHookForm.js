@@ -30,12 +30,12 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
     people: "",
   });
 
-  const [buttonDisabled, setButtonDisabled] = useState(true);
+  // const [buttonDisabled, setButtonDisabled] = useState(true);
 
   // form datası her güncellendiğinde valid mi diye kontrol et
-  useEffect(() => {
-    formSemasi.isValid(formData).then((valid) => setButtonDisabled(!valid));
-  }, [formData]);
+  // useEffect(() => {
+  //   formSemasi.isValid(formData).then((valid) => setButtonDisabled(!valid));
+  // }, [formData]);
 
   // yup form alani her değiştiğinde çalışan kontrol fonksiyonu
   function formAlaniniKontrolEt(name, value) {
@@ -92,11 +92,12 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
       id: nanoid(5),
       status: "yapılacak",
     });
-    setFormData({
-      title: "",
-      description: "",
-      people: [],
-    });
+    // setFormData({
+    //   title: "",
+    //   description: "",
+    //   people: [],
+    // });
+    reset();
   }
 
   return (
@@ -157,7 +158,7 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
         <button
           className="submit-button"
           type="submit"
-          disabled={buttonDisabled}
+          // disabled={buttonDisabled}
         >
           Kaydet
         </button>
