@@ -111,8 +111,8 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
           // name="title"
           {...register("title")}
           type="text"
-          onChange={handleOthersChange}
-          value={formData.title}
+          // onChange={handleOthersChange}
+          // value={formData.title}
         />
         <p className="input-error">{formErrors.title}</p>
       </div>
@@ -127,8 +127,8 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
           id="description"
           // name="description"
           {...register("description")}
-          onChange={handleOthersChange}
-          value={formData.description}
+          // onChange={handleOthersChange}
+          // value={formData.description}
         ></textarea>
         <p className="input-error">{formErrors.description}</p>
       </div>
@@ -143,8 +143,8 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
                 // name="people"
                 {...register("people")}
                 value={p}
-                onChange={handleCheckboxChange}
-                checked={formData.people.includes(p)}
+                // onChange={handleCheckboxChange}
+                // checked={formData.people.includes(p)}
               />
               {p}
             </label>
