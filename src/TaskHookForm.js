@@ -122,7 +122,13 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
           className="input-text"
           id="title"
           // name="title"
-          {...register("title", { required: "Task başlığı yazılımalıdır." })}
+          {...register("title", {
+            required: "Task başlığı yazılımalıdır.",
+            minLength: {
+              value: 3,
+              message: "Task başlığı en az 3 karakter olmalı",
+            },
+          })}
           type="text"
           // onChange={handleOthersChange}
           // value={formData.title}
@@ -139,7 +145,13 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
           rows="3"
           id="description"
           // name="description"
-          {...register("description", { required: "Açıklama girilmelidir." })}
+          {...register("description", {
+            required: "Açıklama girilmelidir.",
+            minLength: {
+              value: 10,
+              message: "Task açıklaması en az 10 karakter olmalı",
+            },
+          })}
           // onChange={handleOthersChange}
           // value={formData.description}
         ></textarea>
@@ -154,7 +166,16 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
               <input
                 type="checkbox"
                 // name="people"
-                {...register("people", { required: "En az bir kişi seçin" })}
+                {...register("people", {
+                  required: "En az bir kişi seçin",
+                  validate: {
+                    maxLimit: (people) =>
+                      people.length <= 3 || "En fazla 3 kişi seçebilirsiniz",
+
+                    minLimit: (people) =>
+                      people.length >= 1 || "En az bir kişi seçin",
+                  },
+                })}
                 value={p}
                 // onChange={handleCheckboxChange}
                 // checked={formData.people.includes(p)}
