@@ -16,12 +16,24 @@ const formSemasi = Yup.object().shape({
 });
 
 const TaskHookForm = ({ kisiler, submitFn }) => {
-  const { register, handleSubmit, reset } = useForm();
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    people: [],
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isValid, errors },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      title: "",
+      description: "",
+      people: [],
+    },
   });
+  // const [formData, setFormData] = useState({
+  //   title: "",
+  //   description: "",
+  //   people: [],
+  // });
 
   // yup error stateleri
   const [formErrors, setFormErrors] = useState({
@@ -56,33 +68,33 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
   }
 
   // checkboxların değişimini state içerisine eklemek için özel fonksiyon
-  function handleCheckboxChange(e) {
-    const { value } = e.target;
+  // function handleCheckboxChange(e) {
+  //   const { value } = e.target;
 
-    let yeniPeople = [...formData.people];
-    const index = formData.people.indexOf(value);
-    if (index > -1) {
-      yeniPeople.splice(index, 1);
-    } else {
-      yeniPeople.push(value);
-    }
+  //   let yeniPeople = [...formData.people];
+  //   const index = formData.people.indexOf(value);
+  //   if (index > -1) {
+  //     yeniPeople.splice(index, 1);
+  //   } else {
+  //     yeniPeople.push(value);
+  //   }
 
-    formAlaniniKontrolEt("people", yeniPeople);
-    setFormData({
-      ...formData,
-      people: yeniPeople,
-    });
-  }
+  //   formAlaniniKontrolEt("people", yeniPeople);
+  //   setFormData({
+  //     ...formData,
+  //     people: yeniPeople,
+  //   });
+  // }
 
   // diğer form alanları değiştikçe çalışan ve yeni değeri state'e ekleyen fonksiyon
-  function handleOthersChange(e) {
-    const { name, value } = e.target;
-    formAlaniniKontrolEt(name, value);
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  }
+  // function handleOthersChange(e) {
+  //   const { name, value } = e.target;
+  //   formAlaniniKontrolEt(name, value);
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // }
 
   // task ekleme
   function myHandleSubmit(d) {
@@ -110,12 +122,12 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
           className="input-text"
           id="title"
           // name="title"
-          {...register("title")}
+          {...register("title", { required: "Task başlığı yazılımalıdır." })}
           type="text"
           // onChange={handleOthersChange}
           // value={formData.title}
         />
-        <p className="input-error">{formErrors.title}</p>
+        <p className="input-error">{errors.title?.message}</p>
       </div>
 
       <div className="form-line">
@@ -127,11 +139,11 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
           rows="3"
           id="description"
           // name="description"
-          {...register("description")}
+          {...register("description", { required: "Açıklama girilmelidir." })}
           // onChange={handleOthersChange}
           // value={formData.description}
         ></textarea>
-        <p className="input-error">{formErrors.description}</p>
+        <p className="input-error">{errors.description?.message}</p>
       </div>
 
       <div className="form-line">
@@ -142,7 +154,7 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
               <input
                 type="checkbox"
                 // name="people"
-                {...register("people")}
+                {...register("people", { required: "En az bir kişi seçin" })}
                 value={p}
                 // onChange={handleCheckboxChange}
                 // checked={formData.people.includes(p)}
@@ -151,15 +163,11 @@ const TaskHookForm = ({ kisiler, submitFn }) => {
             </label>
           ))}
         </div>
-        <p className="input-error">{formErrors.people}</p>
+        <p className="input-error">{errors.people?.message}</p>
       </div>
 
       <div className="form-line">
-        <button
-          className="submit-button"
-          type="submit"
-          // disabled={buttonDisabled}
-        >
+        <button className="submit-button" type="submit" disabled={!isValid}>
           Kaydet
         </button>
       </div>
