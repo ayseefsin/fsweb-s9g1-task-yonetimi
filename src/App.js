@@ -6,6 +6,9 @@ import TaskHookForm from "./TaskHookForm";
 import PeopleForm from "./PeopleForm";
 import { initialTasks, initialTeam } from "./data";
 import { set } from "react-hook-form";
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
@@ -30,6 +33,7 @@ function App() {
     console.log("deney", id);
     console.log("tamamlama fonksiyonunu buraya yazın");
     setTasks(newTasks);
+    toast("it is completed");
   }
 
   return (
@@ -68,6 +72,7 @@ function App() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
